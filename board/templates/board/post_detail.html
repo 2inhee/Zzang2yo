@@ -48,7 +48,9 @@
 
                         </header>
                         <!-- Preview image figure-->
-                        <img class = "img-fluid rounded" src = "{{ post.upload_image.url }}" alt = "">
+                        {% if post.upload_image %}
+                           <img class = "img-fluid rounded" src = "{{ post.upload_image.url }}" alt = "{{ post.title }} upload_image">
+                        {% endif %}
                         <!-- Post content-->
                         <section class="mb-5">
                             <p>{{ post.content }}</p>
