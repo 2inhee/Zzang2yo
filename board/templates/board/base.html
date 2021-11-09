@@ -2,7 +2,7 @@
 {% load static %}
 <html>
     <head>
-        <title>게시판</title>
+        <title>{% block head_title %}게시판{% endblock %}</title>
         <link rel = "stylesheet" href = "{% static 'board/bootstrap/bootstrap.min.css' %}" media = "screen">
 
         <script type = "text/javascript" src = "what_time_is_it.js"></script>
@@ -71,16 +71,7 @@
               <div class = "col-md-8 col-lg-9" id = "main-area">
 
 
-                  <!-- Blog post-->
-                  <div class="card mb-4">
 
-                    <div class="card-body">
-
-                        <div class="small text-muted">{{ p.created_at }}</div>
-
-
-                    </div>
-                </div>
                 {% block main_area %}
                 {% endblock %}
 
