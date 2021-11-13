@@ -7,6 +7,11 @@ class TestView(TestCase):
     def setUp(self):
         self.client = Client()
 
+    def navbar_test(self, soup):
+        navbar = soup.nav
+        self.assertIn('Board', navbar.text)
+        self.assertIn('Maps', navbar.text)
+
     def test_post_list(self):
         # 1.1. 포스트 목록 페이지 가져온다.
         response = self.client.get('/board/')
@@ -18,12 +23,7 @@ class TestView(TestCase):
         soup = BeautifulSoup(response.content, 'html.parser')
         self.assertEqual(soup.title.text, 'Board')
 
-        # 1.4. 내비게이션 바가 있다.
-        navbar = soup.nav
-
-        # 1.5. Board, Maps 라는 문구가 내비게이션 바에 있다.
-        self.assertIn('Board', navbar.text)
-        self.assertIn('Maps', navbar.text)
+        self.navbar_test(soup)
 
         # 2.1. 포스트(게시물)가 하나도 없다면
         self.assertEqual(Post.objects.count(), 0)
@@ -64,10 +64,7 @@ class TestView(TestCase):
         self.assertEqual(response.status_code, 200)
         soup = BeautifulSoup(response.content, 'html.parser')
 
-        # 2.2. 포스트 목록 페이지와 똑같은 내비게이션 바가 있다.
-        navbar = soup.nav
-        self.assertIn('Board', navbar.text)
-        self.assertIn('Maps', navbar.text)
+        self.navbar_test(soup)
 
         # 2.3. 첫 번째 포스트의 제목(title)이 웹 브라우저 탭 타이틀에 들어 있다.
         self.assertIn(post_001.title, soup.title.text)
