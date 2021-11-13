@@ -16,7 +16,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL) # 삭제된 작성자는 None 으로 표시
 
     def __str__(self):
         return f'[{self.pk}]{self.title} / 작성자 : {self.author}' # 작성자 추가
