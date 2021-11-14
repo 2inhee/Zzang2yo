@@ -1,14 +1,16 @@
 {% extends 'board/base_full_width.html' %}
-
+{% load crispy_forms_tags %}
 {% block head_title %}Create Post - 게시판{% endblock %}
 
 {% block main_area %}
     <h1>게시물 작성하기</h1>
     <hr/>
     <form method = "post" enctype = "multipart/form-data">{% csrf_token %}
-        <table>
-            {{ form }}
-        </table>
+
+            {{ form | crispy }}
+
+
+            <br/>
         <button type = "submit" class = "btn btn-primary float-right">Submit</button>
     </form>
 {% endblock %}
