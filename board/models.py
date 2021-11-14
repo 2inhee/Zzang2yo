@@ -4,6 +4,17 @@ import os
 
 # Create your models here.
 
+# Tag 필드 추가
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return f'/board/tag/{self.slug}'
+
 # 카테고리 모델
 class Category(models.Model):
     name = models.CharField(max_length = 50, unique = True)
@@ -11,6 +22,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return f'/board/category/{self.slug}/'
 
     class Meta:
         verbose_name_plural = 'Categories'
