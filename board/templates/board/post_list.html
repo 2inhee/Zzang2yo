@@ -20,7 +20,7 @@
                         <a href = "#">{{ p.author | upper }}</a>
                          <div class="small text-muted">{{ p.created_at }}</div>
 
-                        <p class="card-text">{{ p.content | truncatewords:30 }}</p>
+                        <p class="card-text">{{ p.get_content_markdown | truncatewords_html:30 | safe }}</p>
                         <a class="btn btn-primary" href="{{ p.get_absolute_url }}">자세히 보기</a>
                     </div>
                 </div>
