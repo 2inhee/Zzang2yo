@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang = "ko">
+<html>
+<head>
+    <title>{% block head_title %}게시판{% endblock %}</title>
+    <link rel = "stylesheet" href = "{% static 'board/bootstrap/bootstrap.min.css' %}" media = "screen">
+
+
+</head>
+
+<body>
+    {% include 'board/navbar.html' %}
+
+    <div class = "container my-3">
+        <div class = "row">
+            <div class = "col-12" id = "main-area">
+                {% block main_area %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+</html>

@@ -1,6 +1,7 @@
 {% extends 'board/base.html' %}
 
 {% block main_area %}
+                  <a class = "btn btn-info btn-sm float-right" href = "/board/create_post/" role = "button">게시글 작성</a>
                   <h1 class = "my-3"> 글 목록 {% if category %}<span class = "badge badge-secondary">{{ category }}</span>{% endif %}</h1>
               {% if post_list.exists %}
 

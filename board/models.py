@@ -4,7 +4,7 @@ import os
 
 # Create your models here.
 
-# Tag 필드 추가
+# Tag 모델
 class Tag(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
@@ -43,6 +43,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL) # 삭제된 작성자는 None 으로 표시
 
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
+
+    tags = models.ManyToManyField(Tag, blank=True) # tags 필드 추가
 
     def __str__(self):
         return f'[{self.pk}]{self.title} / 작성자 : {self.author}' # 작성자 추가
