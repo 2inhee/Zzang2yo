@@ -5,8 +5,13 @@
 {% endblock %}
 
 {% block main_area %}
-                        <div id = "post-area">
-                            <!-- Post title-->
+                        <div id = "post-area" class = "my-3">
+                            <!-- Post title -->
+                            {% if post.category %}
+                                <span class = "badge badge-secondary float-right">{{ post.category }}</span>
+                            {% else %}
+                                <span class = "badge badge-secondary float-right">미분류</span>
+                            {% endif %}
                             <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
                             <p class = "lead">
                                 by
