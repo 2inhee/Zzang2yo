@@ -4,8 +4,18 @@ import os
 
 # Create your models here.
 
+# 카테고리 모델
+class Category(models.Model):
+    name = models.CharField(max_length = 50, unique = True)
+    slug = models.SlugField(max_length = 200, unique = True, allow_unicode=True)
 
+    def __str__(self):
+        return self.name
 
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+# 포스트 모델
 class Post(models.Model):
     title = models.CharField(max_length = 100)
     content = models.TextField()
@@ -17,6 +27,8 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL) # 삭제된 작성자는 None 으로 표시
+
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'[{self.pk}]{self.title} / 작성자 : {self.author}' # 작성자 추가

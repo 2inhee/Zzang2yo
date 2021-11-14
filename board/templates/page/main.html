@@ -1,13 +1,49 @@
-{% extends 'board/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>{% block head_title %}서울시 가로 쓰레기통 위치 제공 서비스{% endblock %}</title>
+        <link rel = "stylesheet" href = "{% static 'board/bootstrap/bootstrap.min.css' %}" media = "screen">
 
-{% block main_area %}
+       
+    </head>
+    <body>
+      {% include 'board/navbar.html' %}
 
-        <div class = "container my-5">
+      <div class = "container my-3">
+          <div class = "row">
+              <div class = "col-md-8 col-lg-9" id = "main-area">
 
-            <h2>환영합니다! 서울시 가로 쓰레기통 위치 제공 서비스 메인 홈페이지입니다 </h2>
 
-            <hr/>
-            <img src = "seoul_image.png" height = 100%>
 
-        </div>
-{% endblock %}
+                {% block main_area %}
+                {% endblock %}
+
+              </div>
+              <div class = "container my-5">
+
+                  <h2>환영합니다! 서울시 가로 쓰레기통 위치 제공 서비스 메인 홈페이지입니다 </h2>
+                  <hr/>
+                  <img src = "/static/image/seoul_image.png" height = 100%>
+
+              </div>
+
+
+
+
+
+
+          </div>
+      </div>
+
+      {% include 'board/footer.html' %}
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+
+
+
+    </body>
+</html>
+
+
