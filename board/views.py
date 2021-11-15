@@ -1,10 +1,21 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from .models import Post, Category, Comment
 from .forms import CommentForm
 from django.core.exceptions import PermissionDenied
+
+
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    post = comment.post
+    if request.user.is_authenticated and request.user == comment.author:
+        comment.delete()
+        return redirect(post.get_absolute_url())
+    else :
+        raise PermissionDenied
 
 # 댓글 수정
 class CommentUpdate(LoginRequiredMixin, UpdateView):
@@ -13,9 +24,10 @@ class CommentUpdate(LoginRequiredMixin, UpdateView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
-            return render(CommentUpdate, self).dispatch(request, *args, **kwargs)
+            return super(CommentUpdate, self).dispatch(request, *args, **kwargs)
         else :
             raise PermissionDenied
+
 
 def new_comment(request, pk):
     if request.user.is_authenticated:
